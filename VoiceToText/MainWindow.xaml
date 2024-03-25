@@ -1,0 +1,45 @@
+﻿<Window x:Class="VoiceToText.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VoiceToText"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <ListView x:Name="UsersListBox" Margin="38,10,656,254" SelectionChanged="UsersListBox_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <!-- Thêm GridViewColumn để tạo cột với header tương ứng -->
+                    <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding Username}" Width="100"/>
+                    
+                    <!-- Thêm thêm cột ở đây nếu cần -->
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Chuyển đổi ListBox thành ListView -->
+        <ListView x:Name="ConverstionListBox" Margin="174,19,30,263" SelectionChanged="ConverstionListBox_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <!-- Thêm GridViewColumn để tạo cột với header tương ứng -->
+                    <GridViewColumn Header="User ID" DisplayMemberBinding="{Binding UserId}" Width="100"/>
+                    <GridViewColumn Header="Conversation ID" DisplayMemberBinding="{Binding ConversationId}" Width="150"/>
+                    <GridViewColumn Header="Started At" DisplayMemberBinding="{Binding StartedAt}" Width="200"/>
+                    <!-- Thêm thêm cột ở đây nếu cần -->
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="MessagesListBox" Margin="38,185,30,48">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="MessageId" DisplayMemberBinding="{Binding MessageId}" Width="100"/>
+                    <GridViewColumn Header="SenderType" DisplayMemberBinding="{Binding SenderType}" Width="100"/>
+                    
+                    <GridViewColumn Header="Text" DisplayMemberBinding="{Binding Text}" Width="500"/>
+                    <GridViewColumn Header="CreatedAt" DisplayMemberBinding="{Binding CreatedAt}" Width="120"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
