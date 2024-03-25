@@ -34,9 +34,9 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="MessageId" DisplayMemberBinding="{Binding MessageId}" Width="100"/>
-                    <GridViewColumn Header="SenderType" DisplayMemberBinding="{Binding SenderType}" Width="100"/>
-                    
-                    <GridViewColumn Header="Text" DisplayMemberBinding="{Binding Text}" Width="500"/>
+                    <GridViewColumn Header="Sender Type" DisplayMemberBinding="{Binding SenderType}" Width="50"/>
+
+                    <GridViewColumn Header="Text" DisplayMemberBinding="{Binding Text}" Width="450"/>
                     <GridViewColumn Header="CreatedAt" DisplayMemberBinding="{Binding CreatedAt}" Width="120"/>
                 </GridView>
             </ListView.View>

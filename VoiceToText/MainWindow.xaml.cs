@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,7 +19,7 @@ namespace VoiceToText
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IValueConverter
     {
 
         private readonly UnitOfWork _unitOfWork;
@@ -103,6 +104,20 @@ namespace VoiceToText
                 GetMessage(selectedCons.ConversationId);
 
             }
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is int senderType)
+            {
+                return senderType == 1 ? "User" : "Bot";
+            }
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }
