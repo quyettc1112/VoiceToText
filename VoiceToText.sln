@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceToText", "VoiceToText\VoiceToText.csproj", "{4DE888E9-E8C5-4B57-AAFE-46C64A335FF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceToText", "VoiceToText\VoiceToText.csproj", "{4DE888E9-E8C5-4B57-AAFE-46C64A335FF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceToText_Repo", "Repo\VoiceToText_Repo.csproj", "{2AC00298-EE1C-455A-813C-C9E4FB43E509}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceToText_Repo", "Repo\VoiceToText_Repo.csproj", "{2AC00298-EE1C-455A-813C-C9E4FB43E509}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestChatGPT", "TestChatGPT\TestChatGPT.csproj", "{6D8ECCA2-08A6-4245-A1F5-FDABC5D4309A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2AC00298-EE1C-455A-813C-C9E4FB43E509}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AC00298-EE1C-455A-813C-C9E4FB43E509}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AC00298-EE1C-455A-813C-C9E4FB43E509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D8ECCA2-08A6-4245-A1F5-FDABC5D4309A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D8ECCA2-08A6-4245-A1F5-FDABC5D4309A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D8ECCA2-08A6-4245-A1F5-FDABC5D4309A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D8ECCA2-08A6-4245-A1F5-FDABC5D4309A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
