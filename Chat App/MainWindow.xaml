@@ -1,0 +1,151 @@
+﻿<Window x:Class="Chat_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:uc="clr-namespace:Chat_App.UserControls"
+        Height="830" Width="1250" ResizeMode="NoResize" Background="Transparent"
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Background-->
+        <Border CornerRadius="0 20 20 0" Background="#f8f7fc" Grid.Column="1" Grid.ColumnSpan="2" Margin="335,0,0,0" Grid.RowSpan="2" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown"/>
+
+        <!---Left Menu 1-->
+        <Border CornerRadius="20" Grid.RowSpan="2" Panel.ZIndex="2" Background="CornflowerBlue">
+            <Grid>
+                <!--App Title-->
+                <TextBlock Text="Chat App" Foreground="#ffffff" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Center"
+                           FontWeight="SemiBold" Margin="0 30 0 0">
+                    <TextBlock.LayoutTransform>
+                        <RotateTransform Angle="90" />
+                    </TextBlock.LayoutTransform>
+                </TextBlock>
+
+                <!--Account Button-->
+                <StackPanel Margin="0 170 0 0">
+                    <uc:AccountMenuButton Title="T" GradientColor1="#d1baff" GradientColor2="#b07bff"/>
+                    <uc:AccountMenuButton Title="Q" GradientColor1="#fba0cb" GradientColor2="#fe7094"/>
+                    <uc:AccountMenuButton Title="L" GradientColor1="#e5db6f" GradientColor2="#e2c649"/>
+
+                    <!--Add Button-->
+                    <Button Style="{StaticResource lefSideButton}">
+                        <Border Background="Transparent" CornerRadius="3" Width="25" Height="25" BorderThickness="0.8"
+                                Margin="-3 0 0 0" BorderBrush="White">
+
+                            <Icon:PackIconMaterial Kind="Plus" Width="10" Height="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <!--Left Menu 2 -->
+        <Border Grid.Column="1" Grid.RowSpan="2" CornerRadius="0 20 20 0" Background="#ffffff" Panel.ZIndex="1" Margin="-25 0 0 0">
+            <Grid>
+                <!--Seperator-->
+                <StackPanel Orientation="Horizontal" Margin="30 0 0 30">
+                    <Rectangle Width="0.8" Stroke="#dadada" VerticalAlignment="Stretch" />
+                </StackPanel>
+
+                <StackPanel>
+                    <Button Content="New Chat" Style="{StaticResource newChatButton}" Margin="50 30 30 0"/>
+                </StackPanel>
+
+                <!--Item Group-->
+                <StackPanel Margin="30 100 15 0">
+                    <TextBlock Text="Today" Margin="25 0 0 5" Style="{StaticResource historyChat}"/>
+
+                    <uc:Item Title1="hello"/>
+
+                    <TextBlock Text="Yesterday" Margin="25 50 0 5" Style="{StaticResource historyChat}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!--Chat Section-->
+        <Border CornerRadius="15" Background="#ffffff" Grid.Column="3" Grid.Row="1" Margin="0 0 30 30" ClipToBounds="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                
+                <!--Top Chat MenuBar-->
+                <Grid Background="#ffffff">
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Opacity="0.1"/>
+                    </Grid.Effect>
+
+                    <TextBlock Text="Hello Key" FontSize="16" Margin="20 15" HorizontalAlignment="Left"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 0 10 0" HorizontalAlignment="Right">
+
+                        <Button Style="{StaticResource textBoxButton}">
+                        <Icon:PackIconMaterial Kind="DotsVertical" Width="14" Height="14" Foreground="#88878e"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                
+                <!--Chats-->
+                <StackPanel Grid.Row="1" Margin="20 10 20 20">
+                    <uc:Chat_Seprator Title="Today"/>
+                    <uc:UserChat UserName="GPT" Image="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1200px-ChatGPT_logo.svg.png"/>
+                    <uc:Messagechat Color="Green" Message="Hello Thiện, Biết tại sao anh thiện uống cf đau đầu không"/>
+
+                    <uc:MyMessageChat Message="Tại sao?"/>
+                    <uc:Messagechat Color="Green" Message="Do anh thiện ..."/>
+                </StackPanel>
+                    
+                
+                <!--Bottom Message Section-->
+                <Grid Grid.Row="2" Margin="10 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!--Message TextBox-->
+                    <Grid>
+                        <TextBlock Margin="15 0 120 0" VerticalAlignment="Center" Foreground="#868686" Panel.ZIndex="1"
+                                   IsHitTestVisible="False" Text="Type yout message ..."/>
+
+                        <!-- Visibility="{Binding ElementName=txtMessage, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"/> -->
+                        <!-- <TextBlock x:Name="txtMessage" Style="{StaticResource messageTextBox}"/> -->
+                        
+                        
+                        <!--Buttons-->
+                        <StackPanel Orientation="Horizontal" Margin="0 0 8 0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Button Style="{StaticResource textBoxButton}" Margin="0 0 1 0">
+                                <Icon:PackIconMaterial Kind="MicrophoneOutline" Width="12" Foreground="#a6a6a6"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <Button Grid.Column="1" Margin="5 0 0 0" Style="{StaticResource textBoxButton}">
+                        <Icon:PackIconMaterial Kind="Send" Width="12" Foreground="#6f59d4"/>
+                    </Button>
+                    
+                        
+                </Grid>
+                    
+                
+            </Grid> 
+        </Border>
+
+
+    </Grid>
+
+</Window>

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceToText", "VoiceToText\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceToText_Repo", "Repo\VoiceToText_Repo.csproj", "{2AC00298-EE1C-455A-813C-C9E4FB43E509}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestChatGPT", "TestChatGPT\TestChatGPT.csproj", "{6D8ECCA2-08A6-4245-A1F5-FDABC5D4309A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestChatGPT", "TestChatGPT\TestChatGPT.csproj", "{6D8ECCA2-08A6-4245-A1F5-FDABC5D4309A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat App", "Chat App\Chat App.csproj", "{6462603D-A67D-48E4-8034-45D9CB1E5884}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6D8ECCA2-08A6-4245-A1F5-FDABC5D4309A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D8ECCA2-08A6-4245-A1F5-FDABC5D4309A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D8ECCA2-08A6-4245-A1F5-FDABC5D4309A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6462603D-A67D-48E4-8034-45D9CB1E5884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6462603D-A67D-48E4-8034-45D9CB1E5884}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6462603D-A67D-48E4-8034-45D9CB1E5884}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6462603D-A67D-48E4-8034-45D9CB1E5884}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
