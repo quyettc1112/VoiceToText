@@ -54,7 +54,7 @@ namespace VoiceToText
                 orderBy: null,
                 includeProperties: "Messages",
                 pageIndex: 1,
-                pageSize: 20
+                pageSize: 200
             );
             ConverstionListBox.ItemsSource = null;
             ConverstionListBox.ItemsSource = conversations;
