@@ -24,6 +24,9 @@ namespace VoiceToText
 
         private readonly UnitOfWork _unitOfWork;
         private readonly VoiceToTextContext _context= new VoiceToTextContext();
+
+        private int _currentUserID = 0;
+        private int _curretnConverID = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -55,6 +58,7 @@ namespace VoiceToText
             );
             ConverstionListBox.ItemsSource = null;
             ConverstionListBox.ItemsSource = conversations;
+            _currentUserID = userID;
 
         }
 
@@ -93,7 +97,7 @@ namespace VoiceToText
 
             MessagesListBox.ItemsSource = null;
             MessagesListBox.ItemsSource = messages;
-
+            _curretnConverID = conversationsId;
 
 
         }
@@ -120,6 +124,42 @@ namespace VoiceToText
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var textRange = new TextRange(textInput.Document.ContentStart, textInput.Document.ContentEnd);
+            string text = textRange.Text.Trim();
+            Message newMes = new Message
+            {
+                ConversationId = _curretnConverID,
+                CreatedOn = DateTime.Now,
+                SenderBy = "User",
+                SenderType = 1,
+                Text = text
+            };
+            _unitOfWork.MessageRepostiory.Add(newMes);
+            _unitOfWork.SaveChanges();
+
+            // Giả lập Bot phản hồi ở đây
+            Message botMes = new Message
+            {
+                ConversationId = _curretnConverID,
+                CreatedOn = DateTime.Now,
+                SenderBy = "Bot",
+                SenderType = 0,
+                Text = "Giả lập máy sẽ phản hồi chổ này"
+            };
+            _unitOfWork.MessageRepostiory.Add(botMes);
+            _unitOfWork.SaveChanges();
+
+            GetMessage(_curretnConverID);
+
         }
     }
 }

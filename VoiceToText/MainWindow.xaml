@@ -5,41 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VoiceToText"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000">
+        Title="MainWindow" Height="650" Width="1002">
     <Grid>
-        <ListView x:Name="UsersListBox" Margin="46,410,802,10" SelectionChanged="UsersListBox_SelectionChanged">
+        <ListView x:Name="UsersListBox" Margin="46,468,802,10" SelectionChanged="UsersListBox_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <!-- Thêm GridViewColumn để tạo cột với header tương ứng -->
                     <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding Username}" Width="100"/>
-                    
+
                     <!-- Thêm thêm cột ở đây nếu cần -->
                 </GridView>
             </ListView.View>
         </ListView>
 
         <!-- Chuyển đổi ListBox thành ListView -->
-        <ListView x:Name="ConverstionListBox" Margin="46,28,802,179" SelectionChanged="ConverstionListBox_SelectionChanged">
+        <ListView x:Name="ConverstionListBox" Margin="46,28,802,197" SelectionChanged="ConverstionListBox_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <!-- Thêm GridViewColumn để tạo cột với header tương ứng -->
-                   <!-- <GridViewColumn Header="User ID" DisplayMemberBinding="{Binding UserId}" Width="100"/> -->
-                  <GridViewColumn Header="Conversation ID" DisplayMemberBinding="{Binding ConversationId}" Width="150"/>
+                    <!-- <GridViewColumn Header="User ID" DisplayMemberBinding="{Binding UserId}" Width="100"/> -->
+                    <GridViewColumn Header="Conversation ID" DisplayMemberBinding="{Binding ConversationId}" Width="150"/>
                     <!--  <GridViewColumn Header="Started At" DisplayMemberBinding="{Binding StartedAt}" Width="200"/> -->
                     <!-- Thêm thêm cột ở đây nếu cần -->
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="MessagesListBox" Margin="220,28,63,179">
+        <ListView x:Name="MessagesListBox" Margin="220,28,63,197">
             <ListView.View>
                 <GridView>
-                 <!--   <GridViewColumn Header="MessageId" DisplayMemberBinding="{Binding MessageId}" Width="100"/> -->
-                    <GridViewColumn Header="Sender Type" DisplayMemberBinding="{Binding SenderType}" Width="100"/>
+                    <!-- GridViewColumn cho Sender Type -->
+                    <GridViewColumn Header="Sender Type" DisplayMemberBinding="{Binding SenderBy}" Width="100"/>
 
-                    <GridViewColumn Header="Text" DisplayMemberBinding="{Binding Text}" Width="500"/>
+                    <!-- GridViewColumn cho Text với DataTemplate để text có thể xuống dòng -->
+                    <GridViewColumn Header="Text" Width="500">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Text}" TextWrapping="Wrap" Width="480"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <!-- GridViewColumn cho CreatedOn -->
                     <GridViewColumn Header="CreatedOn" DisplayMemberBinding="{Binding CreatedOn}" Width="120"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <RichTextBox x:Name="textInput" Margin="220,468,63,61" TextChanged="RichTextBox_TextChanged">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="Input"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Button Content="Voice" HorizontalAlignment="Left" Margin="681,578,0,0" VerticalAlignment="Top" Width="74"/>
+        <Button Content="Send" HorizontalAlignment="Left" Margin="822,578,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
     </Grid>
 </Window>
