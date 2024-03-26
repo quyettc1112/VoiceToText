@@ -41,6 +41,8 @@ namespace VoiceToText_Repo.Models
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
+                entity.Property(e => e.NameConversation).HasColumnName("NameConversation");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Conversations)
                     .HasForeignKey(d => d.UserId)

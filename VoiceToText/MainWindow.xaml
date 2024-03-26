@@ -24,7 +24,7 @@
                 <GridView>
                     <!-- Thêm GridViewColumn để tạo cột với header tương ứng -->
                     <!-- <GridViewColumn Header="User ID" DisplayMemberBinding="{Binding UserId}" Width="100"/> -->
-                    <GridViewColumn Header="Conversation ID" DisplayMemberBinding="{Binding ConversationId}" Width="150"/>
+                    <GridViewColumn Header="Conversation ID" DisplayMemberBinding="{Binding NameConversation}" Width="150"/>
                     <!--  <GridViewColumn Header="Started At" DisplayMemberBinding="{Binding StartedAt}" Width="200"/> -->
                     <!-- Thêm thêm cột ở đây nếu cần -->
                 </GridView>

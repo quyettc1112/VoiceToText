@@ -13,6 +13,7 @@ namespace VoiceToText_Repo.Models
         public int ConversationId { get; set; }
         public int UserId { get; set; }
         public int? Status { get; set; }
+        public string? NameConversation { get; set; }
         public DateTime? CreatedOn { get; set; }
 
         public virtual User User { get; set; }
