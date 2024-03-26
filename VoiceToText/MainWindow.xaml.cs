@@ -98,6 +98,7 @@ namespace VoiceToText
             MessagesListBox.ItemsSource = null;
             MessagesListBox.ItemsSource = messages;
             _curretnConverID = conversationsId;
+            ScrollToListViewItem();
 
 
         }
@@ -160,6 +161,15 @@ namespace VoiceToText
 
             GetMessage(_curretnConverID);
 
+        }
+
+        private void ScrollToListViewItem()
+        {
+            if (MessagesListBox.Items.Count > 0)
+            {
+                var lastItem = MessagesListBox.Items[MessagesListBox.Items.Count - 1];
+                MessagesListBox.ScrollIntoView(lastItem);
+            }
         }
     }
 }
