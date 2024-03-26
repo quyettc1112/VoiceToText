@@ -83,7 +83,7 @@ namespace VoiceToText
                 orderBy: null,
                 includeProperties: "Conversation",
                 pageIndex: 1,
-                pageSize: 20
+                pageSize: 200
             );
             /*List<Message> newList = messages.ToList();
             foreach (var message in newList)
@@ -145,7 +145,6 @@ namespace VoiceToText
                 Text = text
             };
             _unitOfWork.MessageRepostiory.Add(newMes);
-            _unitOfWork.SaveChanges();
 
             // Giả lập Bot phản hồi ở đây
             Message botMes = new Message
