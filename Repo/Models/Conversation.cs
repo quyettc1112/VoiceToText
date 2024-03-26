@@ -12,8 +12,8 @@ namespace VoiceToText_Repo.Models
 
         public int ConversationId { get; set; }
         public int UserId { get; set; }
-        public DateTime? StartedAt { get; set; }
-        public DateTime? EndedAt { get; set; }
+        public int? Status { get; set; }
+        public DateTime? CreatedOn { get; set; }
 
         public virtual User User { get; set; }
         public virtual ICollection<Message> Messages { get; set; }

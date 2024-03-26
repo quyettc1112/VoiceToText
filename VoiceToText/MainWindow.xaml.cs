@@ -19,7 +19,7 @@ namespace VoiceToText
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IValueConverter
+    public partial class MainWindow : Window
     {
 
         private readonly UnitOfWork _unitOfWork;
@@ -32,21 +32,22 @@ namespace VoiceToText
      
         }
 
-        public void TestGetUser() {
-          
+        public void TestGetUser()
+        {
+
             IEnumerable<User> userList = _unitOfWork.UserRepostiory.GetAll();
             UsersListBox.Items.Clear(); // Clear existing items
             UsersListBox.ItemsSource = userList;
         }
 
-    
+
 
         public void GetConversation(int userID)
         {
-            IEnumerable<Conversation> conversations = 
+            IEnumerable<Conversation> conversations =
                 _unitOfWork.ConversationRepostiory.GetPagination(
                     filter: cons =>
-                (cons.UserId == userID) ,
+                (cons.UserId == userID),
                 orderBy: null,
                 includeProperties: "Messages",
                 pageIndex: 1,
@@ -54,10 +55,10 @@ namespace VoiceToText
             );
             ConverstionListBox.ItemsSource = null;
             ConverstionListBox.ItemsSource = conversations;
-         
+
         }
 
-     
+
         private void UsersListBox_SelectionChanged(object User, SelectionChangedEventArgs e)
         {
             if (UsersListBox.SelectedItem is User selectedUser)
@@ -67,9 +68,11 @@ namespace VoiceToText
             }
         }
 
-        public void GetMessage(int conversationsId) {
- 
-            IEnumerable<Message> messages =
+        public void GetMessage(int conversationsId)
+        {
+            IEnumerable<Message> messages = new List<Message>();
+            messages = null;
+             messages =
                 _unitOfWork.MessageRepostiory.GetPagination(
                     filter: cons =>
                 (cons.ConversationId == conversationsId),
@@ -78,7 +81,7 @@ namespace VoiceToText
                 pageIndex: 1,
                 pageSize: 20
             );
-            /*List<Message> newList = messages.ToList();   
+            /*List<Message> newList = messages.ToList();
             foreach (var message in newList)
             {
                 if (message.SenderType == 1)
@@ -87,13 +90,12 @@ namespace VoiceToText
                 }
                 else message.Text = "Bot:       " + message.Text;
             }*/
-           
-           
+
             MessagesListBox.ItemsSource = null;
             MessagesListBox.ItemsSource = messages;
-         
-           
-            
+
+
+
         }
 
         private void ConverstionListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

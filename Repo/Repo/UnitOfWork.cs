@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using VoiceToText_Repo.Models;
 
+
 namespace VoiceToText_Repo.Repo
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork
     {
         private readonly VoiceToTextContext _context;
 

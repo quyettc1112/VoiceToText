@@ -12,7 +12,8 @@ namespace VoiceToText_Repo.Models
 
         public int UserId { get; set; }
         public string Username { get; set; }
-        public DateTime? CreatedAt { get; set; }
+        public string Password { get; set; }
+        public DateTime? CreatedOn { get; set; }
 
         public virtual ICollection<Conversation> Conversations { get; set; }
     }

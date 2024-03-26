@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VoiceToText"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        <ListView x:Name="UsersListBox" Margin="38,10,656,254" SelectionChanged="UsersListBox_SelectionChanged">
+        <ListView x:Name="UsersListBox" Margin="46,410,802,10" SelectionChanged="UsersListBox_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <!-- Thêm GridViewColumn để tạo cột với header tương ứng -->
@@ -19,25 +19,25 @@
         </ListView>
 
         <!-- Chuyển đổi ListBox thành ListView -->
-        <ListView x:Name="ConverstionListBox" Margin="174,19,30,263" SelectionChanged="ConverstionListBox_SelectionChanged">
+        <ListView x:Name="ConverstionListBox" Margin="46,28,802,179" SelectionChanged="ConverstionListBox_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <!-- Thêm GridViewColumn để tạo cột với header tương ứng -->
-                    <GridViewColumn Header="User ID" DisplayMemberBinding="{Binding UserId}" Width="100"/>
-                    <GridViewColumn Header="Conversation ID" DisplayMemberBinding="{Binding ConversationId}" Width="150"/>
-                    <GridViewColumn Header="Started At" DisplayMemberBinding="{Binding StartedAt}" Width="200"/>
+                   <!-- <GridViewColumn Header="User ID" DisplayMemberBinding="{Binding UserId}" Width="100"/> -->
+                  <GridViewColumn Header="Conversation ID" DisplayMemberBinding="{Binding ConversationId}" Width="150"/>
+                    <!--  <GridViewColumn Header="Started At" DisplayMemberBinding="{Binding StartedAt}" Width="200"/> -->
                     <!-- Thêm thêm cột ở đây nếu cần -->
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="MessagesListBox" Margin="38,185,30,48">
+        <ListView x:Name="MessagesListBox" Margin="220,28,63,179">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="MessageId" DisplayMemberBinding="{Binding MessageId}" Width="100"/>
-                    <GridViewColumn Header="Sender Type" DisplayMemberBinding="{Binding SenderType}" Width="50"/>
+                 <!--   <GridViewColumn Header="MessageId" DisplayMemberBinding="{Binding MessageId}" Width="100"/> -->
+                    <GridViewColumn Header="Sender Type" DisplayMemberBinding="{Binding SenderType}" Width="100"/>
 
-                    <GridViewColumn Header="Text" DisplayMemberBinding="{Binding Text}" Width="450"/>
-                    <GridViewColumn Header="CreatedAt" DisplayMemberBinding="{Binding CreatedAt}" Width="120"/>
+                    <GridViewColumn Header="Text" DisplayMemberBinding="{Binding Text}" Width="500"/>
+                    <GridViewColumn Header="CreatedOn" DisplayMemberBinding="{Binding CreatedOn}" Width="120"/>
                 </GridView>
             </ListView.View>
         </ListView>

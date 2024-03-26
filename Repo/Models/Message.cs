@@ -8,8 +8,9 @@ namespace VoiceToText_Repo.Models
         public int MessageId { get; set; }
         public int? ConversationId { get; set; }
         public string Text { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public byte? SenderType { get; set; }
+        public DateTime? CreatedOn { get; set; }
+        public int? SenderType { get; set; }
+        public string SenderBy { get; set; }
 
         public virtual Conversation Conversation { get; set; }
     }
