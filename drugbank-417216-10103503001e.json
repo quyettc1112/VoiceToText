@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "drugbank-417216",
+  "private_key_id": "10103503001e870ebd75747749323b56c67ab37a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCt9f+Bo3AjR/X6\n2GUeLzrzH543Kp9usRZzFvk4CjsyqfqpZhYLc//5ScfFYi5uSOcUC9y4J3WP6f0Y\nn6j+T1eG5jtlV+nzecPbZHF0841nM2Kvks/ae55SHOSAxiX/IeA7ln5cJEjA5a65\noNAzNBf0H7mjwdB91TEmHO5cs0bbh+xOc5T9isoiRALD7IMXcvOpZJzAepiKxZjs\n67ExYnOq2L+EVfTsDj3Myup2i2xnfDEKbB8jfVs+SUlphlge6rIPdaoWZvHcvW2M\nYu7Y4wBBTEt16AtZnW169iW3wIB1kg6ATI9oxv7fvRWoHRwa8rCahBtulsk55Yho\nhKTcktt1AgMBAAECggEAHVDWr13f3K44k36KodjTPhv+sWzHI+QHdLszIgDFY58W\nDRyVS/ZPNY87sXV/fhneiTgLiOQrcWZ8/ryPQdYUmbjsWwKC/EMxoKQPY6ZUlsbn\n008yJG9PKabRUisyRYnLrDcLEdOSiCFcvc8OLwbRH5SGGATmMgJury3SdIBIyV9Z\n8Dg+9eFVMjHydhPG+ZgnEe3tg4+GqqIs6okhBdVuHegoazr0IidCqWZR1icQNloy\n+V27nc6vHXAmZIb99SD3HUUfLbIrh8NJYABJdZrX0DwH8HZG40NKsaYG7lvQJnLp\nneXYezsbZ7MLRrv1FRo0AOImbFhaeAv4c4tP9lBokQKBgQDlitLC/c++A+Zmwqei\n+51cfLFyZiaEMnBjHkNCKU3zvh+KsiyYLSS8ceVULmj3601kp9QaCmTHh2hub5Fr\n+5NeeQCzGUNf0PdwExTuV9lcaQoQFFK5aWunyt4l72RqUMrrfCYCzGOFjZmcWo1/\nEPm9v5iF7R88H9JoHODTEbimJQKBgQDCAx5K3wj1Jah4PobiMqbOAnMTUwUqWycf\nV2j5BRdMvg0ObT22E7X/vMu5j8RuOoRzWeoDDqt8DROiSutm2+jXd70VSePE/v0F\nVLBe7Z1sNlMdOwrZbV2B0dl7dCGjpH1U8AgbFm0u1ov3rsI8YopZ4VHtCBTLI2Tu\nsOer5xCXEQKBgFZlUPy5gWaYmzDUVTpgEBOOj09qqVaakXiNHG2blE6IoeCXPXet\njiUrjVCJA1NFCmU3UfrXLKV5DtJ6RbbqAsbNLnk6qgQ3Z9qUJA2tnQ9OLc5th9Fn\nn3CRR9npZ9coP6gwmzH0cgUDjeyunJFV91n28lZ+MIJ1y8EKFYj8I47NAoGAfJwe\nH76i9TmLvDeE0NHxmw2ttbKz9aF4PkQZMyAW9/51SlfVtBVy5t/vBa8WXioNmj0c\n9Xu9nr6TZsCx8225XnMUqhC8T3HrNzpO0ZnSa4d02Khsbnw0+8W55vYPCRkEOsK0\nohlEZTn9ykafkMNF0zbKNPDk0hhYoopTMnEFkdECgYBU4Brf3k2sugFbPAVlq1Dw\nrhglnE14qROoHYz3qBvQdaG4Xt5qGKBcFwM0JVLkkGjrikTO+7/AYfvKrymTTGtA\nuBhixFqWMrcIkKalpj6iPKH+aEhcPqCaK+Kuz81eYknxALVRKKw9VW8gJA5XFkkM\nXX1wxVvdRL3fbG9UA86wKA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "service@drugbank-417216.iam.gserviceaccount.com",
+  "client_id": "106235479187628506876",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/service%40drugbank-417216.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

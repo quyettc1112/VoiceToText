@@ -19,7 +19,9 @@
         </Grid.RowDefinitions>
 
         <!--Background-->
-        <Border CornerRadius="0 20 20 0" Background="#f8f7fc" Grid.Column="1" Grid.ColumnSpan="2" Margin="335,0,0,0" Grid.RowSpan="2" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown"/>
+        <Border CornerRadius="0 20 20 0" Background="#f8f7fc" Grid.Column="1" Grid.ColumnSpan="2" Margin="335,0,0,0" Grid.RowSpan="2" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <TextBox TextWrapping="Wrap" Text="TextBox"/>
+        </Border>
 
         <!---Left Menu 1-->
         <Border CornerRadius="20" Grid.RowSpan="2" Panel.ZIndex="2" Background="CornflowerBlue">
@@ -82,7 +84,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                
+
                 <!--Top Chat MenuBar-->
                 <Grid Background="#ffffff">
                     <Grid.Effect>
@@ -94,11 +96,11 @@
                     <StackPanel Orientation="Horizontal" Margin="0 0 10 0" HorizontalAlignment="Right">
 
                         <Button Style="{StaticResource textBoxButton}">
-                        <Icon:PackIconMaterial Kind="DotsVertical" Width="14" Height="14" Foreground="#88878e"/>
+                            <Icon:PackIconMaterial Kind="DotsVertical" Width="14" Height="14" Foreground="#88878e"/>
                         </Button>
                     </StackPanel>
                 </Grid>
-                
+
                 <!--Chats-->
                 <StackPanel Grid.Row="1" Margin="20 10 20 20">
                     <uc:Chat_Seprator Title="Today"/>
@@ -108,41 +110,41 @@
                     <uc:MyMessageChat Message="Tại sao?"/>
                     <uc:Messagechat Color="Green" Message="Do anh thiện ..."/>
                 </StackPanel>
-                    
-                
+
+
                 <!--Bottom Message Section-->
                 <Grid Grid.Row="2" Margin="10 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <!--Message TextBox-->
                     <Grid>
-                        <TextBlock Margin="15 0 120 0" VerticalAlignment="Center" Foreground="#868686" Panel.ZIndex="1"
-                                   IsHitTestVisible="False" Text="Type yout message ..."/>
+                        <TextBlock x:Name="txtInput" Margin="0,0,120,0" VerticalAlignment="Center" Foreground="#868686" Panel.ZIndex="1"
+                                   IsHitTestVisible="False" Text="Type yout message ..." HorizontalAlignment="Right" Width="620"/>
 
                         <!-- Visibility="{Binding ElementName=txtMessage, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"/> -->
                         <!-- <TextBlock x:Name="txtMessage" Style="{StaticResource messageTextBox}"/> -->
-                        
-                        
+
+
                         <!--Buttons-->
                         <StackPanel Orientation="Horizontal" Margin="0 0 8 0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                            <Button Style="{StaticResource textBoxButton}" Margin="0 0 1 0">
-                                <Icon:PackIconMaterial Kind="MicrophoneOutline" Width="12" Foreground="#a6a6a6"/>
+                            <Button x:Name="btnVoice" Style="{StaticResource textBoxButton}" Margin="0 0 1 0" Click="Voice_OnClick">
+                                <Icon:PackIconMaterial x:Name="iconVoice" Kind="MicrophoneOutline" Width="12" Foreground="#a6a6a6" HorizontalAlignment="Right" Margin="0,0,23,0" VerticalAlignment="Center"/>
                             </Button>
                         </StackPanel>
                     </Grid>
 
-                    <Button Grid.Column="1" Margin="5 0 0 0" Style="{StaticResource textBoxButton}">
+                    <Button x:Name="btnSend" Grid.Column="1" Margin="5,0,0,0" Style="{StaticResource textBoxButton}" HorizontalAlignment="Left" Width="35">
                         <Icon:PackIconMaterial Kind="Send" Width="12" Foreground="#6f59d4"/>
                     </Button>
-                    
-                        
+
+
                 </Grid>
-                    
-                
-            </Grid> 
+
+
+            </Grid>
         </Border>
 
 
