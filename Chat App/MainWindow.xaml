@@ -126,7 +126,10 @@
                                                                     <Setter.Value>
                                                                         <!-- Template cho tin nhắn từ GPT -->
                                                                         <DataTemplate>
-                                                                            <uc:Messagechat Color="Green" Message="{Binding Text}"/>
+                                                                            <StackPanel>
+                                                                                <uc:UserChat UserName="GPT" Image="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1200px-ChatGPT_logo.svg.png"/>
+                                                                                <uc:Messagechat Color="Green" Message="{Binding Text}"/>
+                                                                            </StackPanel>
                                                                         </DataTemplate>
                                                                     </Setter.Value>
                                                                 </Setter>
