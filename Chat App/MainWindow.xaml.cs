@@ -2,10 +2,14 @@
 using Google.Cloud.Speech.V1;
 using NAudio.Wave;
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
+using VoiceToText_Repo.Models;
+using VoiceToText_Repo.Repo;
 
 
 namespace Chat_App
@@ -15,6 +19,10 @@ namespace Chat_App
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly UnitOfWork _unitOfWork;
+        private readonly VoiceToTextContext _context = new VoiceToTextContext();
+        public ObservableCollection<Message> Messages { get; set; } = new ObservableCollection<Message>();
+
         private BufferedWaveProvider bwp;
         WaveIn waveIn = new WaveIn();
         WaveOut waveOut = new WaveOut();
@@ -25,7 +33,13 @@ namespace Chat_App
         bool isRecord = false;
         public MainWindow()
         {
+            _unitOfWork = new UnitOfWork(_context);
             InitializeComponent();
+            DataContext = this;
+    
+            var messages = _unitOfWork.MessageRepostiory.GetAll(); // Giả sử đây trả về List<Message>
+            Messages = new ObservableCollection<Message>(messages);
+          
         }
 
         // ================= SPEECH ========================================
@@ -202,6 +216,51 @@ namespace Chat_App
                     IsMaximized = true;
                 }
             }
+        }
+        // ================ Auto Scrool ==============================
+     
+
+        private void ItemsControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            myScrollViewer.ScrollToEnd();
+        }
+
+
+        // ================ SEND MESSAGE ==============================
+        private void btnSend_Click(object sender, RoutedEventArgs e)
+        {
+            string text = txtInput.Text.Trim();
+            if (text != null)
+            {
+                Message newMes = new Message
+                {
+                    ConversationId = 1,
+                    CreatedOn = DateTime.Now,
+                    SenderBy = "User",
+                    SenderType = 1,
+                    Text = text
+                };
+                _unitOfWork.MessageRepostiory.Add(newMes);
+                Messages.Add(newMes);
+
+                // Giả lập Bot phản hồi ở đây
+                Message botMes = new Message
+                {
+                    ConversationId = 1,
+                    CreatedOn = DateTime.Now,
+                    SenderBy = "Bot",
+                    SenderType = 0,
+                    Text = "Giả lập máy sẽ phản hồi chổ này"
+                };
+                _unitOfWork.MessageRepostiory.Add(botMes);
+                _unitOfWork.SaveChanges();
+                Messages.Add(botMes);
+                myScrollViewer.ScrollToEnd();
+            }
+            else {
+                MessageBox.Show("Null Input");
+            }
+            txtInput.Clear();
         }
     }
 }

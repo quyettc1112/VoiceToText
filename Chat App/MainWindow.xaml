@@ -80,7 +80,7 @@
         <Border CornerRadius="15" Background="#ffffff" Grid.Column="3" Grid.Row="1" Margin="0 0 30 30" ClipToBounds="True">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="700" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
@@ -102,14 +102,60 @@
                 </Grid>
 
                 <!--Chats-->
-                <StackPanel Grid.Row="1" Margin="20 10 20 20">
-                    <uc:Chat_Seprator Title="Today"/>
-                    <uc:UserChat UserName="GPT" Image="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1200px-ChatGPT_logo.svg.png"/>
-                    <uc:Messagechat Color="Green" Message="Hello Thiện, Biết tại sao anh thiện uống cf đau đầu không"/>
+                <Grid Margin="0 50 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                    <uc:MyMessageChat Message="Tại sao?"/>
-                    <uc:Messagechat Color="Green" Message="Do anh thiện ..."/>
-                </StackPanel>
+                    <!-- Các phần tử khác (nút, thanh công cụ, ...) -->
+
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Name="myScrollViewer">
+                        <StackPanel Margin="20 10 20 20">
+                            <ItemsControl ItemsSource="{Binding Messages}" Loaded="ItemsControl_Loaded">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <ContentControl Content="{Binding}">
+                                                <ContentControl.Style>
+                                                    <Style TargetType="ContentControl">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding SenderType}" Value="0">
+                                                                <Setter Property="ContentTemplate">
+                                                                    <Setter.Value>
+                                                                        <!-- Template cho tin nhắn từ GPT -->
+                                                                        <DataTemplate>
+                                                                            <uc:Messagechat Color="Green" Message="{Binding Text}"/>
+                                                                        </DataTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding SenderType}" Value="1">
+                                                                <Setter Property="ContentTemplate">
+                                                                    <Setter.Value>
+                                                                        <!-- Template cho tin nhắn từ người dùng -->
+                                                                        <DataTemplate>
+                                                                            <uc:MyMessageChat Message="{Binding Text}"/>
+                                                                        </DataTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </ContentControl.Style>
+                                            </ContentControl>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!-- Các phần tử khác (thanh nhập liệu, ...) -->
+
+                </Grid>
+
 
 
                 <!--Bottom Message Section-->
@@ -121,8 +167,9 @@
 
                     <!--Message TextBox-->
                     <Grid>
-                        <TextBlock x:Name="txtInput" Margin="0,0,120,0" VerticalAlignment="Center" Foreground="#868686" Panel.ZIndex="1"
-                                   IsHitTestVisible="False" Text="Type yout message ..." HorizontalAlignment="Right" Width="620"/>
+
+                        <TextBox x:Name="txtInput" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="#868686" Panel.ZIndex="1"
+                                   IsHitTestVisible="True" Text="Type yout message ..." HorizontalAlignment="Left" Height="70" Width="671"/>
 
                         <!-- Visibility="{Binding ElementName=txtMessage, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"/> -->
                         <!-- <TextBlock x:Name="txtMessage" Style="{StaticResource messageTextBox}"/> -->
@@ -136,8 +183,8 @@
                         </StackPanel>
                     </Grid>
 
-                    <Button x:Name="btnSend" Grid.Column="1" Margin="5,0,0,0" Style="{StaticResource textBoxButton}" HorizontalAlignment="Left" Width="35">
-                        <Icon:PackIconMaterial Kind="Send" Width="12" Foreground="#6f59d4"/>
+                    <Button x:Name="btnSend" Grid.Column="1" Margin="5,0,0,0" Style="{StaticResource textBoxButton}" HorizontalAlignment="Left" Width="35" Click="btnSend_Click">
+                        <Icon:PackIconMaterial Kind="Send" Width="12" Margin="10,0,0,0" Foreground="#6f59d4"/>
                     </Button>
 
 
