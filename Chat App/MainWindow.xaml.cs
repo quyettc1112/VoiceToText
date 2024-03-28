@@ -1,15 +1,18 @@
 ﻿
 using Google.Cloud.Speech.V1;
+using Microsoft.EntityFrameworkCore.Metadata;
 using NAudio.Wave;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using VoiceToText_Repo.Models;
 using VoiceToText_Repo.Repo;
+using static VoiceToText_Repo.Ulity.ChatGptAPI;
 
 
 namespace Chat_App
@@ -19,6 +22,8 @@ namespace Chat_App
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string apiUrl = "https://api.openai.com/v1/chat/completions";
+        private string apiKey = "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";
         private readonly UnitOfWork _unitOfWork;
         private readonly VoiceToTextContext _context = new VoiceToTextContext();
         public ObservableCollection<Message> Messages { get; set; } = new ObservableCollection<Message>();
@@ -227,7 +232,7 @@ namespace Chat_App
 
 
         // ================ SEND MESSAGE ==============================
-        private void btnSend_Click(object sender, RoutedEventArgs e)
+        private async void btnSend_Click(object sender, RoutedEventArgs e)
         {
             string text = txtInput.Text.Trim();
             if (text != null)
@@ -243,6 +248,7 @@ namespace Chat_App
                 _unitOfWork.MessageRepostiory.Add(newMes);
                 Messages.Add(newMes);
 
+                string gptResponse = await GetResponeGPTAsync(text);
                 // Giả lập Bot phản hồi ở đây
                 Message botMes = new Message
                 {
@@ -250,17 +256,30 @@ namespace Chat_App
                     CreatedOn = DateTime.Now,
                     SenderBy = "Bot",
                     SenderType = 0,
-                    Text = "Giả lập máy sẽ phản hồi chổ này"
+                    Text = gptResponse 
                 };
                 _unitOfWork.MessageRepostiory.Add(botMes);
                 _unitOfWork.SaveChanges();
                 Messages.Add(botMes);
                 myScrollViewer.ScrollToEnd();
+                txtInput.Clear();
             }
             else {
                 MessageBox.Show("Null Input");
             }
             txtInput.Clear();
+        }
+
+        // ================ CALL API GPT ==============================
+        private async Task<string> GetResponeGPTAsync(string prompt) // Đã sửa đổi để sử dụng tham số prompt
+        {
+            if (!string.IsNullOrEmpty(prompt))
+            {
+                ChatGPTCall gptCall = new ChatGPTCall(apiUrl, apiKey);
+                string response = await gptCall.GenerateResponse(prompt);
+                return response;
+            }
+            return "Maybe some problem";
         }
     }
 }
