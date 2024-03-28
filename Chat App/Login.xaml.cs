@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using NAudio.CoreAudioApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,11 +58,30 @@ namespace Chat_App
         {
             if (!string.IsNullOrEmpty(txtEmail.Text) && !string.IsNullOrEmpty(passwordBox.Password))
             {
-                User user = _unitOfWork.UserRepostiory.GetPagination().FirstOrDefault(o=> o.Username.Equals(txtEmail.Text) && o.Password.Equals(passwordBox.Password));
+                VoiceToText_Repo.Models.User user = _unitOfWork.UserRepostiory.GetPagination().FirstOrDefault(o=> o.Username.Equals(txtEmail.Text) && o.Password.Equals(passwordBox.Password));
+               
                 if (user != null)
                 {
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.user = user;
+
+                    mainWindow.PastList.ItemsSource = _unitOfWork.ConversationRepostiory.GetPagination(
+                            filter: cons => 
+                        (cons.UserId == mainWindow.user.UserId && DateTime.Compare((DateTime)cons.CreatedOn, DateTime.Now) < 0),
+                        orderBy: null,
+                        includeProperties: "Messages",
+                        null,
+                        null
+                    );
+                    mainWindow.TodayList.ItemsSource = _unitOfWork.ConversationRepostiory.GetPagination(
+                            filter: cons =>
+                        (cons.UserId == mainWindow.user.UserId && DateTime.Compare((DateTime)cons.CreatedOn, DateTime.Today) == 0),
+                        orderBy: null,
+                        includeProperties: "Messages",
+                        null,
+                        null
+                    );
+
                     mainWindow.Show();
                 }
                 else

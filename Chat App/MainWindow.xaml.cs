@@ -3,8 +3,10 @@ using Google.Cloud.Speech.V1;
 using Microsoft.EntityFrameworkCore.Metadata;
 using NAudio.Wave;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +28,7 @@ namespace Chat_App
         private string apiKey = "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";
         private readonly UnitOfWork _unitOfWork;
         private readonly VoiceToTextContext _context = new VoiceToTextContext();
+        private int? conversationId = null;
         public ObservableCollection<Message> Messages { get; set; } = new ObservableCollection<Message>();
         public int UserId { get; set; }
 
@@ -43,11 +46,31 @@ namespace Chat_App
             _unitOfWork = new UnitOfWork(_context);
             InitializeComponent();
             DataContext = this;
-    
             //var messages = _unitOfWork.MessageRepostiory.GetAll(); // Giả sử đây trả về List<Message>
-            Messages = new ObservableCollection<Message>();
-          
+            //Messages = new ObservableCollection<Message>();
+
         }
+        //FETCH DATA
+        public void GetMessage(int conversationsId)
+        {
+            IEnumerable<Message> messages = new List<Message>();
+            messages = null;
+            messages =
+               _unitOfWork.MessageRepostiory.GetPagination(
+                   filter: cons =>
+               (cons.ConversationId == conversationsId),
+               orderBy: null,
+               includeProperties: "Conversation",
+               pageIndex: 1,
+               pageSize: 200
+           );
+
+            this.Messages = new ObservableCollection<Message>(messages);
+
+            MessageList.ItemsSource = messages;
+        }
+        //
+
 
         // ================= SPEECH ========================================
         private void InitWaveInAndWaveOut()
@@ -86,7 +109,7 @@ namespace Chat_App
                 {
                     Encoding = RecognitionConfig.Types.AudioEncoding.Linear16,
                     SampleRateHertz = 16000,
-                    LanguageCode = "en",
+                    LanguageCode = "vi",
                 }, RecognitionAudio.FromFile("audio.raw"));
 
 
@@ -170,6 +193,42 @@ namespace Chat_App
 
         }
 
+        private void GetConversationData()
+        {
+            PastList.ItemsSource = _unitOfWork.ConversationRepostiory.GetPagination(
+                            filter: cons =>
+                        (cons.UserId == user.UserId && DateTime.Compare((DateTime)cons.CreatedOn, DateTime.Now) < 0),
+                        orderBy: null,
+                        includeProperties: "Messages",
+                        null,
+                        null
+                    ).OrderByDescending(i => i.ConversationId);
+            TodayList.ItemsSource = _unitOfWork.ConversationRepostiory.GetPagination(
+                    filter: cons =>
+                (cons.UserId == user.UserId && DateTime.Compare((DateTime)cons.CreatedOn, DateTime.Today) == 0),
+                orderBy: null,
+                includeProperties: "Messages",
+                null,
+                null
+            ).OrderByDescending(i => i.ConversationId);
+        }
+
+        private void NewChat_OnClick(object sender, RoutedEventArgs e)
+        {
+            Conversation dto = new Conversation();
+            dto.NameConversation = "Conversation " + DateTime.Now.ToString();
+            dto.CreatedOn = DateTime.Now;
+            dto.UserId = user.UserId;
+            dto.Status = 1;
+
+            _unitOfWork.ConversationRepostiory.Add(dto);
+            _unitOfWork.SaveChanges();
+
+            //conversationId = _unitOfWork.ConversationRepostiory.GetAll().ToList().Max();
+
+            GetConversationData();
+        }
+
         private void Voice_OnClick(object sender, RoutedEventArgs e)
         {
             Console.WriteLine(isRecord ? "Is recording" : "not recording");
@@ -196,6 +255,34 @@ namespace Chat_App
         }
 
         // ================ SPEECH ==============================
+        private void Item_Click_Past(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("ACCESS ITEM CLICK");
+
+            if (PastList.SelectedItem is Conversation conversation)
+            {
+                conversationId = conversation.ConversationId;
+
+                if (conversationId != null)
+                    GetMessage((int)conversationId);
+            }
+
+        }
+
+        private void Item_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("ACCESS ITEM CLICK");
+
+            if (TodayList.SelectedItem is Conversation conversation)
+            {
+                conversationId = conversation.ConversationId;
+
+                if (conversationId != null)
+                    GetMessage((int)conversationId);
+            }
+
+        }
+
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
              if(e.ChangedButton == MouseButton.Left )
@@ -237,39 +324,53 @@ namespace Chat_App
         private async void btnSend_Click(object sender, RoutedEventArgs e)
         {
             string text = txtInput.Text.Trim();
+
+
             if (text != null)
             {
                 Message newMes = new Message
                 {
-                    ConversationId = 1,
+                    ConversationId = conversationId,
                     CreatedOn = DateTime.Now,
-                    SenderBy = "User",
+                    SenderBy = user.Username,
                     SenderType = 1,
                     Text = text
                 };
                 _unitOfWork.MessageRepostiory.Add(newMes);
-                Messages.Add(newMes);
+                /*List<Message> messages = (List<Message>) MessageList.ItemsSource;
+                messages.Add(newMes);
 
+                MessageList.ItemsSource = messages;*/
+                _unitOfWork.SaveChanges();
+                txtInput.Clear();
+
+                GetMessage((int)conversationId);
                 string gptResponse = await GetResponeGPTAsync(text);
                 // Giả lập Bot phản hồi ở đây
                 Message botMes = new Message
                 {
-                    ConversationId = 1,
+                    ConversationId = conversationId,
                     CreatedOn = DateTime.Now,
                     SenderBy = "Bot",
                     SenderType = 0,
                     Text = gptResponse 
                 };
+
+                /*messages = (List<Message>)MessageList.ItemsSource;
+                messages.Add(botMes);
+
+                MessageList.ItemsSource = messages;*/
+
                 _unitOfWork.MessageRepostiory.Add(botMes);
                 _unitOfWork.SaveChanges();
                 Messages.Add(botMes);
                 myScrollViewer.ScrollToEnd();
-                txtInput.Clear();
+
+                GetMessage((int)conversationId);
             }
             else {
                 MessageBox.Show("Null Input");
             }
-            txtInput.Clear();
         }
 
         // ================ CALL API GPT ==============================

@@ -62,27 +62,37 @@
                 </StackPanel>
 
                 <StackPanel>
-                    <Button Content="New Chat" Style="{StaticResource newChatButton}" Margin="50 30 30 0"/>
+                    <Button Content="New Chat" Click="NewChat_OnClick" Margin="50 30 30 0"/>
                 </StackPanel>
 
                 <!--Item Group-->
                 <StackPanel Margin="30 100 15 0">
                     <TextBlock Text="Today" Margin="25 0 0 5" Style="{StaticResource historyChat}"/>
-                    
-                    <Grid Margin="10 10 10 0">
+
+                    <ScrollViewer Height="200" Grid.Row="1" VerticalScrollBarVisibility="Auto" Name="myScrollViewer_2">
+                        <StackPanel Margin="20 10 20 20">
+                            <ListBox BorderThickness="0" Name="TodayList" Width="300" Height="Auto" Margin="5">
+                                <!-- Định dạng mỗi mục bằng cách sử dụng DataTemplate -->
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <!-- Hiển thị mỗi mục là một TextBox có thể chỉnh sửa -->
+                                        <TextBlock Width="auto" MouseLeftButtonUp="Item_Click" Text="{Binding NameConversation}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                        <Grid Margin="10 10 10 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="275"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <!--History Chat Button-->
-                        <Button x:Name="HistorychatBtn" Content="Show history chat" Style="{StaticResource historyButtonStyle}" Click="HistorychatBtn_Click" Background="Transparent" Grid.Column="0"/>
-                        
+
                         <!--Popup Button-->
-                        <Button x:Name="OptionBtn" Click="OptionBtn_Click"  Style="{StaticResource optionButtonStyle}" Background="Transparent" Grid.Column="1">
-                            <Icon:PackIconMaterial Kind="DotsVertical" Width="20" Height="20" Foreground="Black" Opacity="0.5"/>
-                        </Button>
-                        
+
                         <Popup x:Name="optionsPopup" PlacementTarget="{Binding ElementName=ToggleOptions}" Placement="Right" StaysOpen="False">
                             <Border BorderThickness="0.5" BorderBrush="Gray" Background="Transparent">
                                 <StackPanel HorizontalAlignment="Center" Background="Transparent">
@@ -97,7 +107,22 @@
                         </Popup>
                     </Grid>
 
-                    <TextBlock Text="Yesterday" Margin="25 300 0 5" Style="{StaticResource historyChat}"/>
+                    <TextBlock Text="Past" Margin="25 100 0 5" Style="{StaticResource historyChat}"/>
+
+                    <ScrollViewer Height="200" Grid.Row="1" VerticalScrollBarVisibility="Auto" Name="myScrollViewer_1">
+                        <StackPanel Margin="20 10 20 20">
+                            <ListBox BorderThickness="0" Name="PastList" Width="300" Height="Auto" Margin="5">
+                                <!-- Định dạng mỗi mục bằng cách sử dụng DataTemplate -->
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <!-- Hiển thị mỗi mục là một TextBox có thể chỉnh sửa -->
+                                        <!--PreviewMouseDown="Item_Click"-->
+                                        <TextBlock MouseLeftButtonUp="Item_Click_Past" Padding="8 8 8 8"  Text="{Binding NameConversation}" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </ScrollViewer>
                 </StackPanel>
             </Grid>
         </Border>
@@ -139,7 +164,7 @@
 
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Name="myScrollViewer">
                         <StackPanel Margin="20 10 20 20">
-                            <ItemsControl ItemsSource="{Binding Messages}" Loaded="ItemsControl_Loaded">
+                            <ItemsControl Name="MessageList" Loaded="ItemsControl_Loaded">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
