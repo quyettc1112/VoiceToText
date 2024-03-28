@@ -135,17 +135,16 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-
-                <!--Top Chat MenuBar-->
+                
+                    <!--Top Chat MenuBar-->
                 <Grid Background="#ffffff">
                     <Grid.Effect>
                         <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Opacity="0.1"/>
                     </Grid.Effect>
 
-                    <TextBlock Text="Hello Key" FontSize="16" Margin="20 15" HorizontalAlignment="Left"/>
+                    <TextBlock Text="OpenAI" FontSize="16" Margin="20 15" HorizontalAlignment="Left"/>
 
                     <StackPanel Orientation="Horizontal" Margin="0 0 10 0" HorizontalAlignment="Right">
-
                         <Button Style="{StaticResource textBoxButton}">
                             <Icon:PackIconMaterial Kind="DotsVertical" Width="14" Height="14" Foreground="#88878e"/>
                         </Button>
@@ -223,19 +222,19 @@
                     <Grid>
                         <TextBox x:Name="txtInput" Style="{StaticResource RoundedTextBoxStyle}" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="#868686" Panel.ZIndex="1"
                             IsHitTestVisible="True" Text="Type your message ..." HorizontalAlignment="Left" Height="70" Width="671"
-                            TextWrapping="Wrap" AcceptsReturn="True"/>
+                            TextWrapping="Wrap" AcceptsReturn="True" IsEnabled="False"/>
 
 
                         <!--Buttons-->
                         <StackPanel Orientation="Horizontal" Margin="0 0 8 0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                            <Button x:Name="btnVoice" Style="{StaticResource textBoxButton}" Margin="0 0 1 0" Click="Voice_OnClick">
-                                <Icon:PackIconMaterial x:Name="iconVoice" Kind="MicrophoneOutline" Width="12" Foreground="#a6a6a6" HorizontalAlignment="Right" Margin="0,0,23,0" VerticalAlignment="Center"/>
+                            <Button x:Name="btnVoice" Style="{StaticResource textBoxButton}" Margin="0 0 1 0" Click="Voice_OnClick" IsEnabled="False">
+                                <Icon:PackIconMaterial x:Name="iconVoice" Kind="MicrophoneOutline" Width="12" Foreground="#a6a6a6" HorizontalAlignment="Right" Margin="0,0,23,0" VerticalAlignment="Center" IsEnabled="False"/>
                             </Button>
                         </StackPanel>
                     </Grid>
 
-                    <Button x:Name="btnSend" Grid.Column="1" Margin="5,0,0,0" Style="{StaticResource textBoxButton}" HorizontalAlignment="Left" Width="35" Click="btnSend_Click">
-                        <Icon:PackIconMaterial Kind="Send" Width="12" Margin="10,0,0,0" Foreground="#6f59d4"/>
+                    <Button x:Name="btnSend" Grid.Column="1" Margin="5,0,0,0" Style="{StaticResource textBoxButton}" HorizontalAlignment="Left" Width="35" Click="btnSend_Click" IsEnabled="False">
+                        <Icon:PackIconMaterial Kind="Send" Width="12" Margin="10,0,0,0" Foreground="#6f59d4" IsEnabled="False"/>
                     </Button>
 
 

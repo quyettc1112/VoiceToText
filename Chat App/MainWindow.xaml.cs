@@ -37,6 +37,7 @@ namespace Chat_App
         WaveOut waveOut = new WaveOut();
         WaveFileReader reader;
         WaveFileWriter writer;
+        string language = "vi";
         string output = "audio.raw";
         public User user { get; set; }
 
@@ -109,7 +110,7 @@ namespace Chat_App
                 {
                     Encoding = RecognitionConfig.Types.AudioEncoding.Linear16,
                     SampleRateHertz = 16000,
-                    LanguageCode = "vi",
+                    LanguageCode = language,
                 }, RecognitionAudio.FromFile("audio.raw"));
 
 
@@ -133,6 +134,30 @@ namespace Chat_App
 
             }
 
+            if (txtInput.Text.ToLower().Trim().Equals("đổi ngôn ngữ sang tiếng việt"))
+            {
+                language = "vi";
+
+                txtInput.Text = "Đổi ngôn ngữ sang tiếng Việt thành công";
+            }
+            else if (txtInput.Text.ToLower().Trim().Equals("đổi ngôn ngữ sang tiếng anh"))
+            {
+                language = "en";
+
+                txtInput.Text = "Đổi ngôn ngữ sang tiếng Anh thành công";
+            }
+            else if (txtInput.Text.ToLower().Trim().Equals("change language to vietnamese"))
+            {
+                language = "vi";
+
+                txtInput.Text = "Change language to Vietnamese successfully";
+            }
+            else if (txtInput.Text.ToLower().Trim().Equals("change language to english"))
+            {
+                language = "en";
+
+                txtInput.Text = "Change language to English successfully";
+            }
         }
 
         void waveIn_DataAvailable(object sender, WaveInEventArgs e)
@@ -185,27 +210,22 @@ namespace Chat_App
             writer.Close();
             writer = null;
 
-            //reader = new WaveFileReader("audio.raw"); // (new MemoryStream(bytes));
-
-            /*waveOut.Init(reader);
-            waveOut.PlaybackStopped += new EventHandler<StoppedEventArgs>(waveOut_PlaybackStopped);
-            waveOut.Play();*/
-
         }
 
         private void GetConversationData()
         {
             PastList.ItemsSource = _unitOfWork.ConversationRepostiory.GetPagination(
                             filter: cons =>
-                        (cons.UserId == user.UserId && DateTime.Compare((DateTime)cons.CreatedOn, DateTime.Now) < 0),
+                        (cons.UserId == user.UserId && DateTime.Compare(((DateTime)cons.CreatedOn).Date, DateTime.Now.Date) < 0),
                         orderBy: null,
                         includeProperties: "Messages",
                         null,
                         null
                     ).OrderByDescending(i => i.ConversationId);
+
             TodayList.ItemsSource = _unitOfWork.ConversationRepostiory.GetPagination(
                     filter: cons =>
-                (cons.UserId == user.UserId && DateTime.Compare((DateTime)cons.CreatedOn, DateTime.Today) == 0),
+                (cons.UserId == user.UserId && DateTime.Compare(((DateTime)cons.CreatedOn).Date, DateTime.Now.Date) == 0),
                 orderBy: null,
                 includeProperties: "Messages",
                 null,
@@ -224,9 +244,11 @@ namespace Chat_App
             _unitOfWork.ConversationRepostiory.Add(dto);
             _unitOfWork.SaveChanges();
 
-            //conversationId = _unitOfWork.ConversationRepostiory.GetAll().ToList().Max();
+            conversationId = _unitOfWork.ConversationRepostiory.GetAll().ToList().Max(i => i.ConversationId);
 
             GetConversationData();
+            GetMessage((int)conversationId);
+            TodayList.SelectedIndex = 0;
         }
 
         private void Voice_OnClick(object sender, RoutedEventArgs e)
@@ -254,6 +276,13 @@ namespace Chat_App
 
         }
 
+        private void Language_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+        }
+
         // ================ SPEECH ==============================
         private void Item_Click_Past(object sender, RoutedEventArgs e)
         {
@@ -261,6 +290,10 @@ namespace Chat_App
 
             if (PastList.SelectedItem is Conversation conversation)
             {
+                txtInput.IsEnabled = true;
+                btnSend.IsEnabled = true;
+                btnVoice.IsEnabled = true;
+
                 conversationId = conversation.ConversationId;
 
                 if (conversationId != null)
@@ -275,6 +308,10 @@ namespace Chat_App
 
             if (TodayList.SelectedItem is Conversation conversation)
             {
+                txtInput.IsEnabled = true;
+                btnSend.IsEnabled = true;
+                btnVoice.IsEnabled = true;
+
                 conversationId = conversation.ConversationId;
 
                 if (conversationId != null)
