@@ -31,7 +31,7 @@ namespace VoiceToText
         {
             InitializeComponent();
             _unitOfWork = new UnitOfWork(_context);
-            TestGetUser();
+            //TestGetUser();
      
         }
 

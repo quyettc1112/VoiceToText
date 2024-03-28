@@ -4,7 +4,7 @@
              Name="myMessageChat">
     
     <Border CornerRadius="0 10 10 10" Background="#f8f7fc" Padding="10 7" HorizontalAlignment="Right" Margin="0 5 0 0">
-    <TextBlock Text="{Binding ElementName=myMessageChat, Path=Message}" FontSize="14" Foreground="#94939a" VerticalAlignment="Center" Margin="3 0 3 2"/>
+        <TextBlock Text="{Binding ElementName=myMessageChat, Path=Message}" FontSize="14" TextWrapping="Wrap" Foreground="#94939a" VerticalAlignment="Center" Margin="3 0 3 2"/>
     </Border>
     
 </UserControl>
