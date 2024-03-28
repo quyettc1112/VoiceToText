@@ -35,6 +35,7 @@ namespace Chat_App
         WaveFileReader reader;
         WaveFileWriter writer;
         string output = "audio.raw";
+        public User user { get; set; }
 
         bool isRecord = false;
         public MainWindow()
@@ -43,8 +44,8 @@ namespace Chat_App
             InitializeComponent();
             DataContext = this;
     
-            var messages = _unitOfWork.MessageRepostiory.GetAll(); // Giả sử đây trả về List<Message>
-            Messages = new ObservableCollection<Message>(messages);
+            //var messages = _unitOfWork.MessageRepostiory.GetAll(); // Giả sử đây trả về List<Message>
+            Messages = new ObservableCollection<Message>();
           
         }
 
