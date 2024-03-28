@@ -68,10 +68,36 @@
                 <!--Item Group-->
                 <StackPanel Margin="30 100 15 0">
                     <TextBlock Text="Today" Margin="25 0 0 5" Style="{StaticResource historyChat}"/>
+                    
+                    <Grid Margin="10 10 10 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="275"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!--History Chat Button-->
+                        <Button x:Name="HistorychatBtn" Content="Show history chat" Style="{StaticResource historyButtonStyle}" Click="HistorychatBtn_Click" Background="Transparent" Grid.Column="0"/>
+                        
+                        <!--Popup Button-->
+                        <Button x:Name="OptionBtn" Click="OptionBtn_Click"  Style="{StaticResource optionButtonStyle}" Background="Transparent" Grid.Column="1">
+                            <Icon:PackIconMaterial Kind="DotsVertical" Width="20" Height="20" Foreground="Black" Opacity="0.5"/>
+                        </Button>
+                        
+                        <Popup x:Name="optionsPopup" PlacementTarget="{Binding ElementName=ToggleOptions}" Placement="Right" StaysOpen="False">
+                            <Border BorderThickness="0.5" BorderBrush="Gray" Background="Transparent">
+                                <StackPanel HorizontalAlignment="Center" Background="Transparent">
+                                    <Button Background="White">
+                                        <Icon:PackIconMaterial Kind="Pencil" Width="20" Height="20" Foreground="Black"/>
+                                    </Button>
+                                    <Button Background="White">
+                                        <Icon:PackIconMaterial Kind="Delete" Width="20" Height="20" Foreground="Black"/>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
+                        </Popup>
+                    </Grid>
 
-                    <uc:Item Title1="hello"/>
-
-                    <TextBlock Text="Yesterday" Margin="25 50 0 5" Style="{StaticResource historyChat}"/>
+                    <TextBlock Text="Yesterday" Margin="25 300 0 5" Style="{StaticResource historyChat}"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -170,13 +196,9 @@
 
                     <!--Message TextBox-->
                     <Grid>
-
-                        <TextBox x:Name="txtInput" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="#868686" Panel.ZIndex="1"
-                            IsHitTestVisible="True" Text="Type yout message ..." HorizontalAlignment="Left" Height="70" Width="671"
+                        <TextBox x:Name="txtInput" Style="{StaticResource RoundedTextBoxStyle}" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="#868686" Panel.ZIndex="1"
+                            IsHitTestVisible="True" Text="Type your message ..." HorizontalAlignment="Left" Height="70" Width="671"
                             TextWrapping="Wrap" AcceptsReturn="True"/>
-
-                        <!-- Visibility="{Binding ElementName=txtMessage, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"/> -->
-                        <!-- <TextBlock x:Name="txtMessage" Style="{StaticResource messageTextBox}"/> -->
 
 
                         <!--Buttons-->
