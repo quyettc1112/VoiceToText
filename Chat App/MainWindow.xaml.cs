@@ -282,5 +282,22 @@ namespace Chat_App
             }
             return "Maybe some problem";
         }
+
+        private void OptionBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (optionsPopup.IsOpen)
+            {
+                optionsPopup.IsOpen = false;
+            }
+            else
+            {
+                optionsPopup.IsOpen = true;
+            }
+        }
+
+        private void HistorychatBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
