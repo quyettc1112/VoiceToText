@@ -27,6 +27,7 @@ namespace Chat_App
         private readonly UnitOfWork _unitOfWork;
         private readonly VoiceToTextContext _context = new VoiceToTextContext();
         public ObservableCollection<Message> Messages { get; set; } = new ObservableCollection<Message>();
+        public int UserId { get; set; }
 
         private BufferedWaveProvider bwp;
         WaveIn waveIn = new WaveIn();

@@ -8,4 +8,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Chat App\Chat App.csproj" />
+    <ProjectReference Include="..\Repo\VoiceToText_Repo.csproj" />
+  </ItemGroup>
+
 </Project>
