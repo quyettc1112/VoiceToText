@@ -136,7 +136,7 @@
                                                                     <Setter.Value>
                                                                         <!-- Template cho tin nhắn từ người dùng -->
                                                                         <DataTemplate>
-                                                                            <uc:MyMessageChat Message="{Binding Text}"/>
+                                                                            <uc:MyMessageChat  Message="{Binding Text}"/>
                                                                         </DataTemplate>
                                                                     </Setter.Value>
                                                                 </Setter>
@@ -169,7 +169,8 @@
                     <Grid>
 
                         <TextBox x:Name="txtInput" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="#868686" Panel.ZIndex="1"
-                                   IsHitTestVisible="True" Text="Type yout message ..." HorizontalAlignment="Left" Height="70" Width="671"/>
+                            IsHitTestVisible="True" Text="Type yout message ..." HorizontalAlignment="Left" Height="70" Width="671"
+                            TextWrapping="Wrap" AcceptsReturn="True"/>
 
                         <!-- Visibility="{Binding ElementName=txtMessage, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"/> -->
                         <!-- <TextBlock x:Name="txtMessage" Style="{StaticResource messageTextBox}"/> -->
