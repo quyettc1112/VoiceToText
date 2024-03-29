@@ -3,6 +3,7 @@ using NAudio.CoreAudioApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -63,24 +64,26 @@ namespace Chat_App
                 if (user != null)
                 {
                     MainWindow mainWindow = new MainWindow();
+
                     mainWindow.user = user;
 
                     mainWindow.PastList.ItemsSource = _unitOfWork.ConversationRepostiory.GetPagination(
                             filter: cons => 
-                        (cons.UserId == mainWindow.user.UserId && DateTime.Compare((DateTime)cons.CreatedOn, DateTime.Now) < 0),
+                        (cons.UserId == mainWindow.user.UserId && DateTime.Compare(((DateTime)cons.CreatedOn).Date, DateTime.Now.Date) < 0),
                         orderBy: null,
                         includeProperties: "Messages",
                         null,
                         null
-                    );
+                    ).OrderByDescending(i => i.ConversationId);
+
                     mainWindow.TodayList.ItemsSource = _unitOfWork.ConversationRepostiory.GetPagination(
                             filter: cons =>
-                        (cons.UserId == mainWindow.user.UserId && DateTime.Compare((DateTime)cons.CreatedOn, DateTime.Today) == 0),
+                        (cons.UserId == mainWindow.user.UserId && DateTime.Compare(((DateTime)cons.CreatedOn).Date, DateTime.Now.Date) == 0),
                         orderBy: null,
                         includeProperties: "Messages",
                         null,
                         null
-                    );
+                    ).OrderByDescending(i => i.ConversationId);
 
                     mainWindow.Show();
                 }
