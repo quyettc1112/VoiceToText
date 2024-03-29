@@ -5,6 +5,7 @@ using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -69,7 +70,6 @@ namespace Chat_App
             this.Messages = new ObservableCollection<Message>(messages);
 
             MessageList.ItemsSource = messages;
-            myScrollViewer.ScrollToEnd();
         }
         //
 
@@ -89,6 +89,10 @@ namespace Chat_App
         //CONVERT TO TEXT FUNCTION
         private void ConvertToText()
         {
+            string value = (string)language_selected.Text;
+
+            language = (value == "Vietnam") ? "vi" : "en";
+
             if (File.Exists("audio.raw"))
             {
                 string projectFolderPath = Directory.GetCurrentDirectory();
@@ -135,27 +139,31 @@ namespace Chat_App
 
             }
 
-            if (txtInput.Text.ToLower().Trim().Equals("đổi ngôn ngữ sang tiếng việt"))
+            if (txtInput.Text.ToLower().Trim().Contains("đổi ngôn ngữ sang tiếng việt"))
             {
-                language = "vi";
+                if (language_selected.Items[0] is ComboBoxItem comboBoxItem)
+                    comboBoxItem.IsSelected = true;
 
                 txtInput.Text = "Đổi ngôn ngữ sang tiếng Việt thành công";
             }
-            else if (txtInput.Text.ToLower().Trim().Equals("đổi ngôn ngữ sang tiếng anh"))
+            else if (txtInput.Text.ToLower().Trim().Contains("đổi ngôn ngữ sang tiếng anh"))
             {
-                language = "en";
+                if (language_selected.Items[1] is ComboBoxItem comboBoxItem)
+                    comboBoxItem.IsSelected = true;
 
                 txtInput.Text = "Đổi ngôn ngữ sang tiếng Anh thành công";
             }
-            else if (txtInput.Text.ToLower().Trim().Equals("change language to vietnamese"))
+            else if (txtInput.Text.ToLower().Trim().Contains("change language to vietnamese"))
             {
-                language = "vi";
+                if (language_selected.Items[0] is ComboBoxItem comboBoxItem)
+                    comboBoxItem.IsSelected = true;
 
                 txtInput.Text = "Change language to Vietnamese successfully";
             }
-            else if (txtInput.Text.ToLower().Trim().Equals("change language to english"))
+            else if (txtInput.Text.ToLower().Trim().Contains("change language to english"))
             {
-                language = "en";
+                if (language_selected.Items[1] is ComboBoxItem comboBoxItem)
+                    comboBoxItem.IsSelected = true;
 
                 txtInput.Text = "Change language to English successfully";
             }
@@ -232,6 +240,13 @@ namespace Chat_App
                 null,
                 null
             ).OrderByDescending(i => i.ConversationId);
+        }
+
+        private void cbLanguage_Select(object sender, RoutedEventArgs e)
+        {
+
+            string value = (string)language_selected.Tag;
+
         }
 
         private void NewChat_OnClick(object sender, RoutedEventArgs e)
