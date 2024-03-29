@@ -15,6 +15,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using VoiceToText_Repo.Models;
 using VoiceToText_Repo.Repo;
+using static Google.Cloud.Speech.V1.LanguageCodes;
 using static VoiceToText_Repo.Ulity.ChatGptAPI;
 
 
@@ -144,28 +145,32 @@ namespace Chat_App
                 if (language_selected.Items[0] is ComboBoxItem comboBoxItem)
                     comboBoxItem.IsSelected = true;
 
-                txtInput.Text = "Đổi ngôn ngữ sang tiếng Việt thành công";
+                MessageBox.Show("Đổi ngôn ngữ sang tiếng Việt thành công");
+                txtInput.Text = "";
             }
             else if (txtInput.Text.ToLower().Trim().Contains("đổi ngôn ngữ sang tiếng anh"))
             {
                 if (language_selected.Items[1] is ComboBoxItem comboBoxItem)
                     comboBoxItem.IsSelected = true;
 
-                txtInput.Text = "Đổi ngôn ngữ sang tiếng Anh thành công";
+                MessageBox.Show("Đổi ngôn ngữ sang tiếng Anh thành công");
+                txtInput.Text = "";
             }
             else if (txtInput.Text.ToLower().Trim().Contains("change language to vietnamese"))
             {
                 if (language_selected.Items[0] is ComboBoxItem comboBoxItem)
                     comboBoxItem.IsSelected = true;
 
-                txtInput.Text = "Change language to Vietnamese successfully";
+                MessageBox.Show("Change language to Vietnamese successfully");
+                txtInput.Text = "";
             }
             else if (txtInput.Text.ToLower().Trim().Contains("change language to english"))
             {
                 if (language_selected.Items[1] is ComboBoxItem comboBoxItem)
                     comboBoxItem.IsSelected = true;
 
-                txtInput.Text = "Change language to English successfully";
+                MessageBox.Show("Change language to English successfully");
+                txtInput.Text = "";
             }
         }
 
