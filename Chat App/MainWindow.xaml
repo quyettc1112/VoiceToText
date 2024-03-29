@@ -83,7 +83,7 @@
                         </StackPanel>
                     </ScrollViewer>
 
-                        <Grid Margin="10 10 10 0">
+                    <Grid Margin="10 10 10 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="275"/>
                             <ColumnDefinition Width="*"/>
@@ -135,14 +135,24 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                
-                    <!--Top Chat MenuBar-->
+
+                <!--Top Chat MenuBar-->
                 <Grid Background="#ffffff">
                     <Grid.Effect>
                         <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Opacity="0.1"/>
                     </Grid.Effect>
+                    <StackPanel Orientation="Horizontal" Margin="100 5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <ComboBox Name="language_selected" Width="100" Height="20" Margin="20 5">
+                            <ComboBoxItem DataContext="vi" Tag="vi" IsSelected="True">
+                                Vietnam
+                            </ComboBoxItem>
+                            <ComboBoxItem DataContext="en" Tag="en">
+                                English
+                            </ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
 
-                    <TextBlock Text="OpenAI" FontSize="16" Margin="20 15" HorizontalAlignment="Left"/>
+                    <TextBlock Text="OpenAI" FontSize="16" Margin="20 5" HorizontalAlignment="Left"/>
 
                     <StackPanel Orientation="Horizontal" Margin="0 0 10 0" HorizontalAlignment="Right">
                         <Button Style="{StaticResource textBoxButton}">
@@ -153,6 +163,12 @@
 
                 <!--Chats-->
                 <Grid Margin="0 50 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32*"/>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="154*"/>
+                        <ColumnDefinition Width="614*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -161,7 +177,7 @@
 
                     <!-- Các phần tử khác (nút, thanh công cụ, ...) -->
 
-                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Name="myScrollViewer">
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Name="myScrollViewer" Grid.ColumnSpan="4">
                         <StackPanel Margin="20 10 20 20">
                             <ItemsControl Name="MessageList" Loaded="ItemsControl_Loaded">
                                 <ItemsControl.ItemTemplate>
