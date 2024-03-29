@@ -71,6 +71,7 @@ namespace Chat_App
             this.Messages = new ObservableCollection<Message>(messages);
 
             MessageList.ItemsSource = messages;
+            myScrollViewer.ScrollToEnd();
         }
         //
 
