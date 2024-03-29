@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:uc="clr-namespace:Chat_App.UserControls"
-        Height="830" Width="1250" ResizeMode="NoResize" Background="Transparent"
-        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" >
+        Height="850" Width="1250" ResizeMode="CanMinimize" Background="White"
+        AllowsTransparency="False" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" >
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,7 +20,7 @@
 
         <!--Background-->
         <Border CornerRadius="0 20 20 0" Background="#f8f7fc" Grid.Column="1" Grid.ColumnSpan="2" Margin="335,0,0,0" Grid.RowSpan="2" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-            <TextBox TextWrapping="Wrap" Text="TextBox"/>
+            <TextBox TextWrapping="Wrap" Text="" />
         </Border>
 
         <!---Left Menu 1-->
